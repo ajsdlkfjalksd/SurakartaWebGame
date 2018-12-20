@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.ge {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.age {
+    width: 40px; height: 40px;
+    position: absolute;
+    background-color: red;
+    opacity: 0.7;
+}

@@ -1,0 +1,29 @@
+
+extends layout
+
+block content
+
+	nav.navbar.navbar-default.navbar-fixed-top
+		.container
+			.navbar-header
+				.navbar-brand Surakarta
+			ul.nav.navbar-nav.navbar-right
+				li
+					.navbar-btn#btn-back-home.btn.btn-default
+						| Back to Home
+					.navbar-btn#btn-logout.btn.btn-default
+						| Sign Out
+
+
+	script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+	#chart_div(style="margin-top:10%")
+
+
+block scripts
+	script(src='/vendor/jquery-2.2.3.min.js')
+	script(src='/vendor/jquery.form.min.js')
+	script(src='/vendor/bootstrap.min.js')
+	script(src='/js/views/chart.js')
+	script(src='/js/views/home.js')
+	script(src='/js/controllers/homeController.js')
+	script(src='/js/form-validators/accountValidator.js')

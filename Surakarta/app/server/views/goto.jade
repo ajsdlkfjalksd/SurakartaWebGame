@@ -1,0 +1,14 @@
+
+// preset form values if we receive a userdata object //
+- user = typeof(udata) != 'undefined' ? udata : { }
+
+#account-form-container.center-vertical
+	form.form-horizontal.well
+		h2 Home
+			h6 Please make a choice
+		hr
+		.center
+			a.btn.btn-default.btn-block(href='game') Join or create a room
+			a.btn.btn-default.btn-block(href='map') Top 5 Players on Google map
+			a.btn.btn-default.btn-block(href='setting') Account setting
+			a.btn.btn-default.btn-block(href='chart') Charts

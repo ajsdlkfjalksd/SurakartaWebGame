@@ -1,0 +1,72 @@
+extends layout
+
+block style
+    meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+    meta(charset='utf-8')
+    title Using closures in event listeners
+    style.
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+    script(src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA5eENu9U9Mtbx5Fy-H0cfdptXYplJlxUM')
+    script.
+        function initialize() {
+            var mapOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(22.31, 114.18)
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+            var southWest = new google.maps.LatLng(22.30, 114.17);
+            var northEast = new google.maps.LatLng(22.315, 114.185);
+            var bounds = new google.maps.LatLngBounds(southWest, northEast);
+            map.fitBounds(bounds);
+            var lngSpan = northEast.lng() - southWest.lng();
+            var latSpan = northEast.lat() - southWest.lat();
+            for (var i = 0; i < 5; i++) {
+                var position = new google.maps.LatLng(
+                    southWest.lat() + latSpan * Math.random(),
+                    southWest.lng() + lngSpan * Math.random());
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+                marker.setTitle((i + 1).toString());
+                attachSecretMessage(marker, i);
+            }
+        }
+        function attachSecretMessage(marker, num) {
+            var message = ['test 6 wins 10 games', 'cmr 5 wins 6 games', '3421 5 wins 8 games', '123 2 wins 5 games', '123123 1 wins 9 games'];
+            var infowindow = new google.maps.InfoWindow({
+                content: message[num]
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(marker.get('map'), marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+block content
+
+    nav.navbar.navbar-default.navbar-fixed-top
+        .container
+            .navbar-header
+                .navbar-brand Surakarta
+            ul.nav.navbar-nav.navbar-right
+                li
+                    .navbar-btn#btn-back-home.btn.btn-default
+                        | Back to Home
+                    .navbar-btn#btn-logout.btn.btn-default
+                        | Sign Out
+
+    #map-canvas
+
+block scripts
+    script(src='/vendor/jquery-2.2.3.min.js')
+    script(src='/vendor/jquery.form.min.js')
+    script(src='/vendor/bootstrap.min.js')
+    script(src='/js/views/home.js')
+    script(src='/js/controllers/homeController.js')
+    script(src='/js/form-validators/accountValidator.js')
